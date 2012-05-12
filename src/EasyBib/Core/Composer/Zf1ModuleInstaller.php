@@ -28,7 +28,7 @@ class Zf1ModuleInstaller extends LibraryInstaller
         $name = $package->getPrettyName();
         list($vendor, $module) = explode('/', $name);
 
-        return sprintf('%s/%s', $this->vendorDir, $module);
+        return sprintf('%s/%s', $this->vendorDir, strtolower($module));
     }
 
     /**

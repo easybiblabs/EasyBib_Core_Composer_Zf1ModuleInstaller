@@ -53,7 +53,18 @@ class Zf1ModuleInstallerTestCase extends \PHPUnit_Framework_TestCase
         chdir($currentCwd);
     }
 
-    public function testEnsureVendorIsStrippedFromInstallPath()
+    public static function moduleProvider()
+    {
+        return array(
+            array('easybib-foo/default', 'default'),
+            array('foo/Bar', 'bar'),
+        );
+    }
+
+    /**
+     * @dataProvider moduleProvider
+     */
+    public function testEnsureVendorIsStrippedFromInstallPath($dep, $module)
     {
         $fixtureDir = dirname(dirname(dirname(dirname(__DIR__)))) . '/fixtures';
 
@@ -67,9 +78,9 @@ class Zf1ModuleInstallerTestCase extends \PHPUnit_Framework_TestCase
             new NullIO()
         );
 
-        $package = new MemoryPackage('easybib-foo/default', '1.0.0', '1.0.0-stable');
+        $package = new MemoryPackage($dep, '1.0.0', '1.0.0-stable');
 
-        $this->assertEquals('app/modules/default', $installer->getInstallPath($package));
+        $this->assertEquals('app/modules/' . $module, $installer->getInstallPath($package));
 
         chdir($currentCwd);
     }
