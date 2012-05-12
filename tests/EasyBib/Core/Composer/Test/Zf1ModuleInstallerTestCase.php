@@ -5,6 +5,9 @@ use EasyBib\Core\Composer\Zf1ModuleInstaller;
 use Composer\Downloader\DownloadManager;
 use Composer\IO\NullIO;
 
+/**
+ * @author Till Klampaeckel <till@lagged.biz>
+ */
 class Zf1ModuleInstallerTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
