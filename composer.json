@@ -11,6 +11,9 @@
     "extra": {
         "class": "EasyBib\\Core\\Composer\\Zf1ModuleInstaller"
     },
+    "require": {
+        "php": ">=5.3.0"
+    },
     "require-dev": {
         "composer/composer": "*"
     }
