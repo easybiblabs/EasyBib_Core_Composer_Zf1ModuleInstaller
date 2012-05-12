@@ -1,0 +1,5 @@
+<phpunit bootstrap="./tests/TestInit.php" colors="true">
+    <testsuite>
+        <file>./tests/EasyBib/Core/Composer/Test/Zf1ModuleInstallerTestCase.php</file>
+    </testsuite>
+</phpunit>
