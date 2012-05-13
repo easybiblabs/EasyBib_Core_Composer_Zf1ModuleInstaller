@@ -25,10 +25,10 @@ class Zf1ModuleInstaller extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
-        $name = $package->getPrettyName();
+        $name = $package->getName();
         list($vendor, $module) = explode('/', $name);
 
-        return sprintf('%s/%s', $this->vendorDir, strtolower($module));
+        return sprintf('%s/%s', $this->vendorDir, $module);
     }
 
     /**
