@@ -1,0 +1,46 @@
+## A Composer installer for ZendFramework(1) modules
+
+This is a WIP – so handle with care!
+
+### How does it work?
+
+Say, you have a module called **admin**:
+
+You put the following `composer.json` file into this module:
+
+    {
+        "name":"example/admin",
+        "description": "Admin module!",
+        "type":"zf1-module",
+        "authors":[
+            {
+                "name":"John Doe",
+                "email":"john@example.org"
+            }
+        ],
+        "require": {
+            "php": ">=5.3.0",
+            "easybib/zf1module-installer": "*"
+        }
+    }
+
+The other important bit is [`easybib/zf1module-installer`](packagist.org/packages/easybib/zf1module-installer).
+
+In your application, add your own module as a dependency:
+
+    {
+        "name":"example/main",
+        "description": "My application",
+        "authors":[
+            {
+                "name":"John Doe",
+                "email":"john@example.org"
+            }
+        ],
+        "require": {
+            "php": ">=5.3.0",
+            "example/admin": "*"
+        }
+    }
+
+When you run `php composer.phar install`, the `admin` module should end up in your modules folder.
