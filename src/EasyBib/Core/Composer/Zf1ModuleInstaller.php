@@ -14,21 +14,17 @@ class Zf1ModuleInstaller extends LibraryInstaller
     /**
      * {@inheritDoc}
      */
-    public function __construct($vendorDir, $binDir, DownloadManager $dm, IOInterface $io, $type = 'zf1-module')
-    {
-        $vendorDir = $this->getVendorDir();
-        parent::__construct($vendorDir, $binDir, $dm, $io, $type);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getInstallPath(PackageInterface $package)
     {
+        static $vendorDir;
+        if (null === $vendorDir) {
+            $vendorDir = $this->getVendorDir();
+        }
+
         $name = $package->getName();
         list($vendor, $module) = explode('/', $name);
 
-        return sprintf('%s/%s', $this->vendorDir, $module);
+        return sprintf('%s/%s', $vendorDir, $module);
     }
 
     /**
@@ -49,10 +45,6 @@ class Zf1ModuleInstaller extends LibraryInstaller
      */
     public function getVendorDir()
     {
-        if (null !== $this->vendorDir) {
-            return $this->vendorDir;
-        }
-
         $appRoot   = getcwd();
         $vendorDir = '';
 
@@ -70,7 +62,6 @@ class Zf1ModuleInstaller extends LibraryInstaller
             throw new \RuntimeException("The 'application directory' does not contain a 'modules' directory.");
         }
 
-        $this->vendorDir = $vendorDir;
-        return $this->vendorDir;
+        return $vendorDir;
     }
 }
