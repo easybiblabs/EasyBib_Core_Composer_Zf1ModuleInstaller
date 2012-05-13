@@ -63,11 +63,13 @@ class Zf1ModuleInstaller extends LibraryInstaller
         }
 
         if (empty($vendorDir)) {
-            throw new \RuntimeException("Could not determine the location of the 'application directory': " . implode(PHP_EOL, debug_backtrace()));
+            throw new \RuntimeException("Could not determine the location of the 'application directory'.");
         }
+
         if (!is_dir($vendorDir)) {
             throw new \RuntimeException("The 'application directory' does not contain a 'modules' directory.");
         }
+
         $this->vendorDir = $vendorDir;
         return $this->vendorDir;
     }
