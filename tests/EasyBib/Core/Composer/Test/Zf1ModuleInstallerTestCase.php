@@ -11,19 +11,6 @@ use Composer\Package\MemoryPackage;
  */
 class Zf1ModuleInstallerTestCase extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testRuntimeException()
-    {
-        new Zf1ModuleInstaller(
-            'vendor',
-            'bin',
-            new DownloadManager(),
-            new NullIO()
-        );
-    }
-
     public static function envProvider()
     {
         return array(
