@@ -3,6 +3,12 @@
     "description": "An installer for ZendFramework(1) modules (WIP).",
     "type": "composer-installer",
     "license": "BSD-3-Clause",
+    "author": [
+        {
+            "name": "Till Klampaeckel",
+            "email": "till@php.net"
+        }
+    ],
     "autoload": {
         "psr-0": {
             "EasyBib\\Core\\Composer": "src/"
