@@ -5,6 +5,8 @@ use \Composer\Installer\LibraryInstaller;
 use \Composer\Package\PackageInterface;
 use \Composer\Downloader\DownloadManager;
 use \Composer\IO\IOInterface;
+use \Composer\Repository\InstalledRepositoryInterface;
+use \Composer\Util\Svn as SvnUtil;
 
 /**
  * @author Till Klampaeckel <till@lagged.biz>
@@ -25,6 +27,69 @@ class Zf1ModuleInstaller extends LibraryInstaller
         list($vendor, $module) = explode('/', $name);
 
         return sprintf('%s/%s', $vendorDir, $module);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        if ($package->getSourceType() !== 'svn') {
+            return parent::install($repo, $package);
+        }
+
+        /**
+         * Check if the SVN repo contains the entire application structure and try to extract
+         * only the module from it!
+         *
+         * This is very ugly, please cover your eyes!
+         */
+        $sourceUrl = $package->getSourceUrl();
+        $sourceRef = $package->getSourceReference();
+        $baseUrl   = sprintf('%s/%s', $sourceUrl, $sourceRef);
+
+        $svnUtil = new SvnUtil(
+            $baseUrl,
+            $this->io
+        );
+
+        /**
+         * @desc Whatever could be the structure - in most cases application/modules.
+         */
+        static $appDirs   = array('application', 'app');
+        static $moduleDir = 'modules';
+
+        foreach ($appDirs as $appDir) {
+            try {
+                $output = $svnUtil->execute(
+                    'svn ls',
+                    sprintf('%s/%s', $baseUrl, $appDir),
+                    null,
+                    null,
+                    $this->io->isVerbose()
+                );
+                if (false === strstr($output, sprintf('%s/', $moduleDir))) {
+                    continue;
+                }
+
+                // success! - adjust the checkout url
+
+                list($vendor, $packageName) = explode('/', $package->getName());
+                if (true === $this->io->isVerbose()) {
+                    $this->io->write(sprintf("Transforming checkout to retrieve module '%s' only.", $packageName));
+                }
+
+                // potential 'Problem?', check if it's always MemoryPackage
+                $package->setSourceReference(sprintf('%s/%s/%s/%s', $sourceRef, $appDir, $moduleDir, $packageName));
+                break;
+
+            } catch (\RuntimeException $e) {
+                // 404 ends up here
+                continue;
+            }
+        }
+
+        return parent::install($repo, $package);
     }
 
     /**
