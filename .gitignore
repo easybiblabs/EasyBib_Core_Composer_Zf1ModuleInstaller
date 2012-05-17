@@ -2,3 +2,5 @@ composer.lock
 composer.phar
 vendor
 .idea
+tests/fixtures/test1/app/modules/*
+tests/fixtures/test2/application/modules/*
