@@ -46,7 +46,21 @@ class Zf1ModuleInstaller extends LibraryInstaller
          */
         $sourceUrl = $package->getSourceUrl();
         $sourceRef = $package->getSourceReference();
-        $baseUrl   = sprintf('%s/%s', $sourceUrl, $sourceRef);
+
+		/**
+		 * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
+		 */
+		if (0 === strpos($package->getPrettyVersion(), 'dev-')) {
+            if (false !== strpos($sourceRef, '@')) {
+                list($trunk, $rev) = explode('@', $sourceRef);
+                if (empty($trunk)) {
+                    throw new \DomainException("Could not parse sourceRef '%s' for package '%'", $sourceRef, $package->getName());
+                }
+                $sourceRef = $trunk;
+            }
+        }
+
+        $baseUrl = sprintf('%s/%s', $sourceUrl, $sourceRef);
 
         $svnUtil = new SvnUtil(
             $baseUrl,
