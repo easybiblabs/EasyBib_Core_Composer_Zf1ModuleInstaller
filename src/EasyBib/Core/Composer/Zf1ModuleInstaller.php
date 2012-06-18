@@ -54,7 +54,9 @@ class Zf1ModuleInstaller extends LibraryInstaller
             if (false !== strpos($sourceRef, '@')) {
                 list($trunk, $rev) = explode('@', $sourceRef);
                 if (empty($trunk)) {
-                    throw new \DomainException("Could not parse sourceRef '%s' for package '%'", $sourceRef, $package->getName());
+                    throw new \DomainException(sprintf(
+                        "Could not parse sourceRef '%s' for package '%'",
+                        $sourceRef, $package->getName()));
                 }
                 $sourceRef = $trunk;
             }
