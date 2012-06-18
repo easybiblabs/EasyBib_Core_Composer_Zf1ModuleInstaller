@@ -100,6 +100,9 @@ class Zf1ModuleInstaller extends LibraryInstaller
                 break;
 
             } catch (\RuntimeException $e) {
+                if (false === strpos($e->getMessage(), 'non-existent')) {
+                    throw $e;
+                }
                 // 404 ends up here
                 continue;
             }
