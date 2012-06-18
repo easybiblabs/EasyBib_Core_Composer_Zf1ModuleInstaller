@@ -95,7 +95,9 @@ class Zf1ModuleInstaller extends LibraryInstaller
 
                 list($vendor, $packageName) = explode('/', $package->getName());
                 if (true === $this->io->isVerbose()) {
-                    $this->io->write(sprintf("Transforming checkout to retrieve module '%s' only.", $packageName));
+                    $this->io->write(
+                        sprintf("Transforming checkout to retrieve module '%s' only.",
+                            $packageName));
                 }
 
                 // potential 'Problem?', check if it's always MemoryPackage
