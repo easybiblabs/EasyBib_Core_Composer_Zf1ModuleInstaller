@@ -62,6 +62,9 @@ class Zf1ModuleInstaller extends LibraryInstaller
             }
         }
 
+        if (substr($sourceRef, 0, 1) == '/') {
+            $sourceRef = substr($sourceRef, 1);
+        }
         $baseUrl = sprintf('%s/%s', $sourceUrl, $sourceRef);
 
         $svnUtil = new SvnUtil(
