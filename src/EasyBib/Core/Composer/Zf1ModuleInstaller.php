@@ -101,7 +101,15 @@ class Zf1ModuleInstaller extends LibraryInstaller
                 }
 
                 // potential 'Problem?', check if it's always MemoryPackage
-                $package->setSourceReference(sprintf('%s/%s/%s/%s', $sourceRef, $appDir, $moduleDir, $packageName));
+                if (substr($sourceRef, -1, 1) == '/') {
+                    $sourceRef = substr($sourceRef, 0, -1);
+                }
+                $newSourceRef = sprintf('%s/%s/%s/%s', $sourceRef, $appDir, $moduleDir, $packageName);
+                if (true === $this->io->isVerbose()) {
+                    $this->io->write(sprintf("Replacing '%s' with '%s' on '%s'.",
+                        $sourceRef, $newSourceRef, $packageName));
+                }
+                $package->setSourceReference($newSourceRef);
                 break;
 
             } catch (\RuntimeException $e) {
