@@ -94,23 +94,18 @@ class Zf1ModuleInstaller extends LibraryInstaller
                 }
 
                 // success! - adjust the checkout url
-
                 list($vendor, $packageName) = explode('/', $package->getName());
-                if (true === $this->io->isVerbose()) {
-                    $this->io->write(
-                        sprintf("Transforming checkout to retrieve module '%s' only.",
-                            $packageName));
-                }
+                $this->io->write(sprintf("<debug>Transforming checkout to retrieve module '%s' only.</debug>",
+                    $packageName));
 
                 // potential 'Problem?', check if it's always MemoryPackage
                 if (substr($sourceRef, -1, 1) == '/') {
                     $sourceRef = substr($sourceRef, 0, -1);
                 }
                 $newSourceRef = sprintf('%s/%s/%s/%s', $sourceRef, $appDir, $moduleDir, $packageName);
-                if (true === $this->io->isVerbose()) {
-                    $this->io->write(sprintf("Replacing '%s' with '%s' on '%s'.",
-                        $sourceRef, $newSourceRef, $packageName));
-                }
+                $this->io->write(sprintf("<debug>Replacing '%s' with '%s' on '%s'.</debug>",
+                    $sourceRef, $newSourceRef, $packageName));
+
                 $package->setSourceReference($newSourceRef);
                 break;
 
@@ -119,6 +114,7 @@ class Zf1ModuleInstaller extends LibraryInstaller
                     throw $e;
                 }
                 // 404 ends up here
+				$this->io->write(sprintf("Did not find %s. Moving on.", %appDir));
                 continue;
             }
         }
