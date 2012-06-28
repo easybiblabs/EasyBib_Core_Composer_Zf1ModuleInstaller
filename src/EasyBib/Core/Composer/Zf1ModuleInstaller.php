@@ -114,7 +114,7 @@ class Zf1ModuleInstaller extends LibraryInstaller
                     throw $e;
                 }
                 // 404 ends up here
-				$this->io->write(sprintf("Did not find %s. Moving on.", %appDir));
+				$this->io->write(sprintf("Did not find %s. Moving on.", $appDir));
                 continue;
             }
         }
