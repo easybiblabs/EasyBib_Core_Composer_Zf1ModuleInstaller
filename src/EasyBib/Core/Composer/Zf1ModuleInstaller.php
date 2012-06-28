@@ -47,6 +47,8 @@ class Zf1ModuleInstaller extends LibraryInstaller
         $sourceUrl = $package->getSourceUrl();
         $sourceRef = $package->getSourceReference();
 
+		$this->io->write(sprintf('<info>Checking out a module from SVN: %s (%s)</info>', $package->getName(), $sourceRef));
+
 		/**
 		 * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
 		 */
