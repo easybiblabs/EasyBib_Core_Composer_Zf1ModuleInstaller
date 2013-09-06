@@ -47,18 +47,28 @@ class Zf1ModuleInstaller extends LibraryInstaller
         $sourceUrl = $package->getSourceUrl();
         $sourceRef = $package->getSourceReference();
 
-		$this->io->write(sprintf('<info>Checking out a module from SVN: %s (%s)</info>', $package->getName(), $sourceRef));
+        $this->io->write(
+            sprintf(
+                '<info>Checking out a module from SVN: %s (%s)</info>',
+                $package->getName(),
+                $sourceRef
+            )
+        );
 
-		/**
-		 * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
-		 */
-		if (0 === strpos($package->getPrettyVersion(), 'dev-')) {
+        /**
+         * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
+         */
+        if (0 === strpos($package->getPrettyVersion(), 'dev-')) {
             if (false !== strpos($sourceRef, '@')) {
                 list($trunk, $rev) = explode('@', $sourceRef);
                 if (empty($trunk)) {
-                    throw new \DomainException(sprintf(
-                        "Could not parse sourceRef '%s' for package '%'",
-                        $sourceRef, $package->getName()));
+                    throw new \DomainException(
+                        sprintf(
+                            "Could not parse sourceRef '%s' for package '%'",
+                            $sourceRef,
+                            $package->getName()
+                        )
+                    );
                 }
                 $sourceRef = $trunk;
             }
@@ -95,16 +105,26 @@ class Zf1ModuleInstaller extends LibraryInstaller
 
                 // success! - adjust the checkout url
                 list($vendor, $packageName) = explode('/', $package->getName());
-                $this->io->write(sprintf("<debug>Transforming checkout to retrieve module '%s' only.</debug>",
-                    $packageName));
+                $this->io->write(
+                    sprintf(
+                        "<debug>Transforming checkout to retrieve module '%s' only.</debug>",
+                        $packageName
+                    )
+                );
 
                 // potential 'Problem?', check if it's always MemoryPackage
                 if (substr($sourceRef, -1, 1) == '/') {
                     $sourceRef = substr($sourceRef, 0, -1);
                 }
                 $newSourceRef = sprintf('%s/%s/%s/%s', $sourceRef, $appDir, $moduleDir, $packageName);
-                $this->io->write(sprintf("<debug>Replacing '%s' with '%s' on '%s'.</debug>",
-                    $sourceRef, $newSourceRef, $packageName));
+                $this->io->write(
+                    sprintf(
+                        "<debug>Replacing '%s' with '%s' on '%s'.</debug>",
+                        $sourceRef,
+                        $newSourceRef,
+                        $packageName
+                    )
+                );
 
                 $package->setSourceReference($newSourceRef);
                 break;
@@ -114,7 +134,7 @@ class Zf1ModuleInstaller extends LibraryInstaller
                     throw $e;
                 }
                 // 404 ends up here
-				$this->io->write(sprintf("Did not find %s. Moving on.", $appDir));
+                                $this->io->write(sprintf("Did not find %s. Moving on.", $appDir));
                 continue;
             }
         }
