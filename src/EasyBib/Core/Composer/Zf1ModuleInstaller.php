@@ -47,12 +47,12 @@ class Zf1ModuleInstaller extends LibraryInstaller
         $sourceUrl = $package->getSourceUrl();
         $sourceRef = $package->getSourceReference();
 
-		$this->io->write(sprintf('<info>Checking out a module from SVN: %s (%s)</info>', $package->getName(), $sourceRef));
+                $this->io->write(sprintf('<info>Checking out a module from SVN: %s (%s)</info>', $package->getName(), $sourceRef));
 
-		/**
-		 * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
-		 */
-		if (0 === strpos($package->getPrettyVersion(), 'dev-')) {
+                /**
+                 * dev- is a branch, likely a weird name with foo@rev. Let's parse out 'rev'. [fix later]
+                 */
+                if (0 === strpos($package->getPrettyVersion(), 'dev-')) {
             if (false !== strpos($sourceRef, '@')) {
                 list($trunk, $rev) = explode('@', $sourceRef);
                 if (empty($trunk)) {
@@ -114,7 +114,7 @@ class Zf1ModuleInstaller extends LibraryInstaller
                     throw $e;
                 }
                 // 404 ends up here
-				$this->io->write(sprintf("Did not find %s. Moving on.", $appDir));
+                                $this->io->write(sprintf("Did not find %s. Moving on.", $appDir));
                 continue;
             }
         }
