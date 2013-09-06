@@ -1,5 +1,18 @@
 ## A Composer installer for ZendFramework(1) modules
 
+[![Build Status](https://travis-ci.org/easybiblabs/zf1module-installer.png?branch=master)](https://travis-ci.org/easybiblabs/zf1module-installer)
+
+[![Latest Stable Version](https://poser.pugx.org/easybib/zf1module-installer/v/stable.png)](https://packagist.org/packages/easybib/zf1module-installer)
+
+[![Total Downloads](https://poser.pugx.org/easybib/zf1module-installer/downloads.png)](https://packagist.org/packages/easybib/zf1module-installer)
+
+[![Montly Downloads](https://poser.pugx.org/easybib/zf1module-installer/d/monthly.png)](https://packagist.org/packages/easybib/zf1module-installer)
+
+[![Daily Downloads](https://poser.pugx.org/easybib/zf1module-installer/d/daily.png)](https://packagist.org/packages/easybib/zf1module-installer)
+
+[![Latest Unstable Version](https://poser.pugx.org/easybib/zf1module-installer/v/unstable.png)](https://packagist.org/packages/easybib/zf1module-installer)
+
+
 This is a WIP – so handle with care!
 
 ### How does it work?
