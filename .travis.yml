@@ -1,16 +1,10 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
-
-before_script:
-  - pear install PHP_CodeSniffer
-  - phpenv rehash
-  - composer self-update
+  - 5.6
 
 script:
-  - composer install --dev
-  - composer validate
-  - phpcs --standard=psr2 src/
+  - ./composer.phar install
+  - ./composer.phar validate
+  - ./vendor/bin/phpcs --standard=psr2 src/
 

@@ -128,7 +128,6 @@ class Zf1ModuleInstaller extends LibraryInstaller
 
                 $package->setSourceReference($newSourceRef);
                 break;
-
             } catch (\RuntimeException $e) {
                 if (false === strpos($e->getMessage(), 'non-existent')) {
                     throw $e;

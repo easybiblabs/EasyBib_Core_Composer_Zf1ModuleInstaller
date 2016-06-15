@@ -2,7 +2,7 @@
     "name": "easybib/zf1module-installer",
     "description": "An installer for ZendFramework(1) modules (WIP).",
     "type": "composer-installer",
-    "license": "BSD-2-Clause",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Till Klampaeckel",
@@ -22,7 +22,8 @@
         "composer-plugin-api": "1.0.0"
     },
     "require-dev": {
-        "composer/composer": "*"
+        "composer/composer": "*",
+        "squizlabs/php_codesniffer": "1.*"
     },
     "minimum-stability": "alpha"
 }
