@@ -18,8 +18,7 @@
         "class": "EasyBib\\Core\\Composer\\Zf1ModuleInstaller"
     },
     "require": {
-        "php": ">=5.3.0",
-        "composer-plugin-api": "1.0.0"
+        "composer-plugin-api": "^1.0"
     },
     "require-dev": {
         "composer/composer": "*",
